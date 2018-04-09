@@ -8,26 +8,15 @@ class Question(models.Model):
     rating = models.IntegerField()
     author = models.CharField(max_length=150)
     likes = models.TextField()
-    QuestionManager = models.Manager()
+    objects = QuestionManager()
 
 
 class QuestionManager(models.Manager):
-    def popular(self):
-        from django.db import connection
-        cursor = connection.cursor()
-        cursor.execute("""
-            SELECT * 
-            FROM Question
-            ORDER BY rating""")
-        
-    def popular(self):
-        from django.db import connection
-        cursor = connection.cursor()
-        cursor.execute("""
-            SELECT * 
-            FROM Question
-            ORDER BY added_at""")
+    def new(self):
+        return self.order_by('-added_at')
 
+    def popular(self):
+        return self.order_by('-rating')
 
 
 class Answer(models.Model):
