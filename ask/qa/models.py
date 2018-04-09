@@ -16,7 +16,7 @@ class Question(models.Model):
     added_at = models.DateField(blank=True, auto_now_add = True)
     rating = models.IntegerField(default = 0)
     author = models.CharField(max_length=150)
-    likes = models.ManyToManyField( User, related name = 'question_like_user')
+    likes = models.ManyToManyField( User, related_name = 'question_like_user')
     
 
 
