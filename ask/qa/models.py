@@ -19,6 +19,14 @@ class QuestionManager(models.Manager):
             SELECT * 
             FROM Question
             ORDER BY rating""")
+        
+    def popular(self):
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT * 
+            FROM Question
+            ORDER BY added_at""")
 
 
 
